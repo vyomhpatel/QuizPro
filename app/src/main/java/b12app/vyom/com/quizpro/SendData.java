@@ -4,8 +4,7 @@ package b12app.vyom.com.quizpro;
  * Created by vyompatel on 4/1/18.
  */
 
-public interface SendDataInterFace {
+public interface SendData  {
 
-    public void sendAns(String ans );
-
+    public void sendData(String ans);
 }

@@ -14,6 +14,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import static android.content.ContentValues.TAG;
 
 /**
@@ -29,8 +31,12 @@ public class Question extends Fragment {
     int q = 1,id;
     String radio;
     Bundle bundle;
-
     SendDataInterFace sendDataInterface;
+    String question_q;
+    ArrayList<String> answers_ques;
+
+
+
 
 
     public void resetRadioButton(){
@@ -137,7 +143,7 @@ public class Question extends Fragment {
             @Override
             public void onClick(View view) {
 
-               bundle = new Bundle();
+
 
                   if(r1.isChecked()){
                       Log.i(TAG, "r1 checked");
@@ -164,13 +170,16 @@ public class Question extends Fragment {
                 if( radio == options[q-1][4]){
                     Log.i(TAG, " answer is correct "+" correct answer is "+options[q-1][4]);
 
-                    bundle.putString("key_ans","correct");
+//                    question_q = questions[q-1];
+                   sendDataInterface.sendAns("correct");
 
 
 
                 } else {
                     Log.i(TAG, "answer is incorrect"+"correct answer is"+options[q-1][4]+"  your answer is "+radio);
-                    bundle.putString("key_ans","incorrect");
+
+                    sendDataInterface.sendAns("incorrect");
+
 
                 }
 
@@ -188,11 +197,12 @@ public class Question extends Fragment {
                        q++;
                        Log.i(TAG, "question: " + q);
 
-                   } else if (q == questions.length - 1) {
+                   } else if (q == questions.length-1) {
                        btnNext.setText("Finish");
-                       Result result = new Result();
-                       result.setArguments(bundle);
-                       getFragmentManager().beginTransaction().replace(R.id.frame, result).commit();
+
+
+
+                       getFragmentManager().beginTransaction().replace(R.id.frame, QuizActivity.result).commit();
                    }
 
 
@@ -204,5 +214,10 @@ public class Question extends Fragment {
         return view;
     }
 
+    @Override
+    public void onAttach(Context context) {
 
+        super.onAttach(context);
+        sendDataInterface = (SendDataInterFace) getActivity();
+    }
 }

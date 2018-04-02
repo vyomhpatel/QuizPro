@@ -25,10 +25,11 @@ public class Result extends Fragment {
 
     ListView result_list;
     TextView result_username;
+    ArrayList<String> questions_list, results_ans;
     int q;
 
 
-    final String[] questions = {"What is splash screen in android?",
+     String[] questions = {"What is splash screen in android?",
             "How many broadcast receivers are available in android?",
             "What is the 9 patch tool in android?",
             "What is the JSON exception in android?",
@@ -42,6 +43,7 @@ public class Result extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        name = getArguments().getString("name");
+        results_ans = new ArrayList<>();
 
     }
 
@@ -50,48 +52,69 @@ public class Result extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.result_list,container,false);
 
-        result_list = view.findViewById(R.id.list_result);
         result_username = view.findViewById(R.id.result_username);
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item_format,R.id.question,questions){
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
-                View view = super.getView(position, convertView, parent);
-                TextView tv = (TextView) view.findViewById(R.id.question);
-
-                    String s = getArguments().getString("key_ans");
-                Log.i(TAG, "question: "+s);
+        result_list = view.findViewById(R.id.list_result);
 
 
 
-                        if(s=="correct"){
+         results_ans =  getArguments().getStringArrayList("key_ans");
 
-                            tv.setTextColor(Color.GREEN);
-
-                        } else if(s=="incorrect"){
-
-                            tv.setTextColor(Color.RED);
-                        }
-
-
-
-
-
-                return view;
-            }
-        };
-
-        result_list.setAdapter(arrayAdapter);
+        ResultAdapter adapter=new ResultAdapter(questions, results_ans, getActivity());
+        result_list.setAdapter(adapter);
 
 
 
 
 
 
-        result_username.setText(SignUpActivity.name);
 
 
         return view;
+
+
+
+//
+//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item_format,R.id.question,questions){
+//            @NonNull
+//            @Override
+//            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+//
+//                View view = super.getView(position, convertView, parent);
+//                TextView tv = (TextView) view.findViewById(R.id.question);
+//
+//                    String s = getArguments().getString("key_ans");
+//
+//                Log.i(TAG, "question: "+s);
+//
+//
+//
+//                        if(s=="correct"){
+//
+//                            tv.setTextColor(Color.GREEN);
+//
+//                        } else if(s=="incorrect"){
+//
+//                            tv.setTextColor(Color.RED);
+//                        }
+//
+
+
+
+
+//                return view;
+//            }
+//        };
+
+//        result_list.setAdapter(arrayAdapter);
+
+
+
+
+
+
+//        result_username.setText(SignUpActivity.name);
+
+
+
     }
 }
