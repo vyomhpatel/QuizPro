@@ -27,7 +27,7 @@ public class Question extends Fragment {
     TextView question;
     RadioGroup radioGroup;
     RadioButton r1,r2, r3, r4, selected;
-    Button btnNext;
+    Button btnNext,btnFinish;
     int q = 1,id;
     String radio;
     Bundle bundle;
@@ -53,6 +53,7 @@ public class Question extends Fragment {
 
 
         question  = view.findViewById(R.id.tv_question);
+        answers_ques = new ArrayList<>();
 
         radioGroup = view.findViewById(R.id.radio_group_1);
         r1 = view.findViewById(R.id.radioButton);
@@ -61,6 +62,7 @@ public class Question extends Fragment {
         r4 =view.findViewById(R.id.radioButton4);
 
         btnNext = view.findViewById(R.id.btnNext);
+        btnFinish = view.findViewById(R.id.btnSubmit);
 
         final String[] questions = {"What is splash screen in android?",
                 "How many broadcast receivers are available in android?",
@@ -171,39 +173,56 @@ public class Question extends Fragment {
                     Log.i(TAG, " answer is correct "+" correct answer is "+options[q-1][4]);
 
 //                    question_q = questions[q-1];
-                   sendDataInterface.sendAns("correct");
+                   sendDataInterface.sendAns("Correct");
+                   answers_ques.add("Correct");
 
 
 
                 } else {
                     Log.i(TAG, "answer is incorrect"+"correct answer is"+options[q-1][4]+"  your answer is "+radio);
 
-                    sendDataInterface.sendAns("incorrect");
-
+                    sendDataInterface.sendAns("Incorrect");
+                    answers_ques.add("Incorrect");
 
                 }
 
 
-                question.setText(questions[q]);
-                r1.setText(options[q][0]);
-                r2.setText(options[q][1]);
-                r3.setText(options[q][2]);
-                r4.setText(options[q][3]);
 
 
-                   if (q < questions.length - 1) {
 
+                   if (q < questions.length) {
+                       question.setText(questions[q]);
+                       r1.setText(options[q][0]);
+                       r2.setText(options[q][1]);
+                       r3.setText(options[q][2]);
+                       r4.setText(options[q][3]);
                        resetRadioButton();
                        q++;
                        Log.i(TAG, "question: " + q);
 
-                   } else if (q == questions.length-1) {
-                       btnNext.setText("Finish");
+                   } else if (q == questions.length) {
+                       btnNext.setVisibility(View.INVISIBLE);
+                       btnFinish.setVisibility(View.VISIBLE);
 
 
 
-                       getFragmentManager().beginTransaction().replace(R.id.frame, QuizActivity.result).commit();
+                       btnFinish.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View view) {
+                               Bundle b = new Bundle();
+                               b.putStringArrayList("key_answer",answers_ques);
+                               Result result = new Result();
+                               result.setArguments(b);
+                               getFragmentManager().beginTransaction().replace(R.id.frame, result).commit();
+                           }
+                       });
+
+
                    }
+
+
+
+
 
 
                }

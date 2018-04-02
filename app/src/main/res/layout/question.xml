@@ -76,4 +76,17 @@
         android:layout_marginTop="27dp"
         android:text="Next" />
 
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/tv_question"
+        android:layout_marginBottom="51dp"
+        android:text="Finish" />
+
 </RelativeLayout>

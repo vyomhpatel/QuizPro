@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class ResultAdapter extends BaseAdapter {
 
-    String[] questions_result = null;
+    String[] questions_result;
     ArrayList<String> answers_result = null;
     Context context;
     LayoutInflater layoutInflater;
@@ -41,15 +41,20 @@ public class ResultAdapter extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
-
+    class holder{
+        TextView question_tv;
+        TextView answer_tv;
+    }
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = layoutInflater.inflate(R.layout.result_list,null);
-        TextView question_tv = view.findViewById(R.id.question);
-        TextView answer_tv = view.findViewById(R.id.answer);
-        question_tv.setText(questions_result[i]);
-        answer_tv.setText(answers_result.get(i));
+        view = layoutInflater.inflate(R.layout.list_item_format,null);
+        holder h=new holder();
+        h.question_tv = view.findViewById(R.id.question);
+        h.answer_tv = view.findViewById(R.id.answer);
 
+        h.question_tv.setText(questions_result[i]);
+        h.answer_tv.setText(answers_result.get(i));
+        view.setTag(h);
         return view;
     }
 }

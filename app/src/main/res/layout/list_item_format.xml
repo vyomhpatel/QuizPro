@@ -7,10 +7,12 @@
     <TextView
         android:id="@+id/question"
         android:textSize="@dimen/list_text"
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:paddingTop="10dp"
-        android:height="70sp"
+        android:height="90sp"
         android:lines="3"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:layout_weight="1"
@@ -18,7 +20,12 @@
 
     <TextView
         android:id="@+id/answer"
-        android:layout_width="wrap_content"
+        android:lines="3"
+        android:height="90sp"
+        android:paddingTop="10dp"
+        android:paddingLeft="15dp"
+        android:textSize="20sp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="answer" />

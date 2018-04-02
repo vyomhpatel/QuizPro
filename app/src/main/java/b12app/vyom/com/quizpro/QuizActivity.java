@@ -14,6 +14,7 @@ public class QuizActivity extends AppCompatActivity implements SendDataInterFace
 
     int i = 0;
     Question question;
+    Bundle b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,8 @@ public class QuizActivity extends AppCompatActivity implements SendDataInterFace
         question = new Question();
         quiz_answers = new ArrayList<>();
         getFragmentManager().beginTransaction().add(R.id.frame,question,"quiz started").commit();
-       result = new Result();
+      // result = new Result();
+     //  b = new Bundle();
     }
 
 
@@ -37,12 +39,12 @@ public class QuizActivity extends AppCompatActivity implements SendDataInterFace
 
 
 
-        Bundle b = new Bundle();
 
-        b.putStringArrayList("answers_array",quiz_answers);
 
-        result.setArguments(b);
+//        b.putStringArrayList("answers_array",quiz_answers);
+//
+//        result.setArguments(b);
 
-        Log.i(TAG, "bundle: "+b.getStringArrayList("answers_array"));
+//        Log.i(TAG, "bundle: "+b.getStringArrayList("answers_array"));
     }
 }

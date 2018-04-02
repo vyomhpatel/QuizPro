@@ -37,7 +37,7 @@ public class Result extends Fragment {
             "Why don't we give MIN SDK as 1 in android?",
             "Main difference between set and list in android?"};
 
-    ArrayList<String> answer =null;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,9 +55,11 @@ public class Result extends Fragment {
         result_username = view.findViewById(R.id.result_username);
         result_list = view.findViewById(R.id.list_result);
 
+        result_username.setText(SignUpActivity.name);
+        results_ans =  getArguments().getStringArrayList("key_answer");
+        Log.i(TAG, "result--ans "+results_ans);
 
 
-         results_ans =  getArguments().getStringArrayList("key_ans");
 
         ResultAdapter adapter=new ResultAdapter(questions, results_ans, getActivity());
         result_list.setAdapter(adapter);
@@ -69,52 +71,20 @@ public class Result extends Fragment {
 
 
 
+
+
+
+
+//
+
+
+
+
+
+
+//
+
+
         return view;
-
-
-
-//
-//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item_format,R.id.question,questions){
-//            @NonNull
-//            @Override
-//            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//
-//                View view = super.getView(position, convertView, parent);
-//                TextView tv = (TextView) view.findViewById(R.id.question);
-//
-//                    String s = getArguments().getString("key_ans");
-//
-//                Log.i(TAG, "question: "+s);
-//
-//
-//
-//                        if(s=="correct"){
-//
-//                            tv.setTextColor(Color.GREEN);
-//
-//                        } else if(s=="incorrect"){
-//
-//                            tv.setTextColor(Color.RED);
-//                        }
-//
-
-
-
-
-//                return view;
-//            }
-//        };
-
-//        result_list.setAdapter(arrayAdapter);
-
-
-
-
-
-
-//        result_username.setText(SignUpActivity.name);
-
-
-
     }
 }
